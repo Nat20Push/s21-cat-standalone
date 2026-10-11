@@ -1,0 +1,24 @@
+name: Build and test Linux cat
+
+on:
+  push:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    container: alpine:3.20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install compiler and GNU cat
+        run: apk add --no-cache build-base coreutils
+      - name: Build static Linux executable
+        run: make CC=gcc CFLAGS='-std=c11 -Wall -Wextra -Werror -O2 -static'
+      - name: Run integration tests
+        run: make test
+      - name: Upload executable
+        uses: actions/upload-artifact@v4
+        with:
+          name: s21_cat-linux-x86_64
+          path: s21_cat
+          if-no-files-found: error
