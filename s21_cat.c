@@ -163,12 +163,10 @@ int main(int argc, char *argv[]) {
   bool has_file = false;
   int result = 0;
 
-  /* Сначала собираем флаги. */
   for (int i = 1; i < argc; i++) {
     check_flag(argv[i], &flags);
   }
 
-  /* Затем обрабатываем все аргументы, которые не являются флагами. */
   for (int i = 1; i < argc; i++) {
     if (check_flag(argv[i], &(Flags){0})) {
       continue;
@@ -189,7 +187,6 @@ int main(int argc, char *argv[]) {
     }
   }
 
-  /* Если имён файлов не было, читаем из stdin. */
   if (!has_file) {
     if (process_stream(stdin, &flags, &line_number, &new_line, &blank_lines) !=
         0) {

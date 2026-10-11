@@ -1,6 +1,5 @@
 #!/bin/sh
 
-# Compare this implementation with the system cat on temporary input files.
 set -u
 LC_ALL=C
 export LC_ALL
@@ -37,8 +36,6 @@ run_test() {
   name=$1
   shift
 
-  # BusyBox cat does not support every GNU option. Skip only cases that
-  # the reference program itself cannot run.
   if "$REFERENCE" "$@" < "$TEMP_DIR/main.txt" > "$TEMP_DIR/expected" 2> "$TEMP_DIR/reference_error"; then
     reference_status=0
   else
