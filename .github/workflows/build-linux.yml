@@ -13,7 +13,7 @@ jobs:
       - name: Install compiler and GNU cat
         run: apk add --no-cache build-base coreutils
       - name: Build static Linux executable
-        run: make CC=gcc CFLAGS='-std=c11 -Wall -Wextra -Werror -O2 -static'
+        run: make rebuild CC=gcc CFLAGS='-std=c11 -Wall -Wextra -Werror -O2 -static'
       - name: Run integration tests
         run: make test
       - name: Upload executable
